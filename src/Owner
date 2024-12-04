@@ -1,3 +1,107 @@
-public class Owner{
-//Attributes
+import java.util.*;
+public class Owner extends User {
+    private int ID;
+    private int phone;
+    private float wolet;
+    private Vehicles vehicles;
+    private String email;
+    private static ArrayList<Reservation> reservationArray = new ArrayList<>(); //ArrayList is more dinamic than the normal array
+
+    Scanner in = new Scanner(System.in);
+
+    public Owner(int id , String email , String name , String password){
+        super(name , password);
+        this.ID = id;
+        this.email = email;
+
+    }
+    //***************Related Functions*************
+    //1.
+    @Override
+    public int logIn(String name , String password){
+        System.out.print("Enter your name: ");
+        name = in.next();
+        System.out.print("Enter your password: ");
+        password = in.next();
+        if(this.name.equals(name) && this.password.equals(password))
+            return 1;
+        else{
+            while (this.name.equals(name) && this.password.equals(password)){
+                System.out.println("Incorrect username or password!\nTry again, please!");
+                System.out.print("Enter your name: ");
+                name = in.next();
+                System.out.print("Enter your password: ");
+                password = in.next();
+            }
+            return -1;
+        }
+    }
+    public void logOut(String name, String password) {
+        
+    }
+    //2.
+    public int menu(){
+        System.out.println("1)Show my account"); //We will put a choice "Edit my account" inside it
+        System.out.println("2)Make a reservation");
+        System.out.println("3)Cancel a reservation");
+        System.out.println("4)Update a reservation");
+        System.out.println("5)Rewords");
+        System.out.println("6)log out");
+        System.out.println("7)Delete my account");
+        System.out.println("\n");
+        int choice = in.nextInt();
+        return choice;
+    }
+    //3.
+    public void displayDetails(){
+        System.out.println("Name: " + this.name);
+        System.out.println("Password: " + this.password);
+        System.out.println("Email: " + this.email);
+        System.out.println("ID: " + this.ID);
+        //System.out.println("Reservation: ");
+        /*
+        * for(int i = 0 ; i < reservations.length() ; i++){
+        *   System.out.print("Reseravtion ID: " + reservations[i].id + "Spot ID: " + reservations[i].Spot);
+        *   for(int j = 0 ; j < reservations[i].Spot.Slots.length() ; j++)
+        *   System.out.print("Slot "+reservations[i].Spot.Slots[j] + "=>\tStart Time: " + reservations[i].Spot.Slots[j].startTime + "\tEnd Time: " + reservations[i].Spot.Slots[j].endTime );
+        *}
+        * }*/
+    }
+    //4.
+    public void makeReservation(Spot spot , int choice ){
+
+    }
+    //.
+    public void selectedChoice(int choice){
+        switch (choice){
+            case 1:{
+                displayDetails();
+                break;
+            }
+            case 2:{
+
+                break;
+            }
+            case 3:{
+
+                break;
+            }
+            case 4:{
+
+                break;
+            }
+            case 5:{
+
+                break;
+            }
+            case 6:{
+
+                break;
+            }
+            case 7:{
+
+                break;
+            }
+        }
+    }
 }
