@@ -10,4 +10,6 @@ public class Admin extends User{
     public int logIn(String name, String password) {
         return 0;
     }
+    public void logOut(String name, String password) {
+    }
 }
