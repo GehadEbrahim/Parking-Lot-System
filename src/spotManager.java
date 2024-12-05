@@ -4,23 +4,25 @@ import java.util.*;
 public class spotManager {
     public List<Spot> loadSpots(String filePath) throws IOException {
         List<Spot> spots = new ArrayList<>();
-       // filePath = "C:/Users/gebra/OneDrive/Desktop/PLS/Spots.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // if (line.startsWith("#") || line.trim().isEmpty()) continue;
+                if (line.trim().isEmpty() || line.trim().startsWith("/")) {
+                    continue;
+                }
 
                 String[] parts = line.split(",");
-                int spotId = Integer.parseInt(parts[0].trim());
-                String type = parts[1].trim();
-                //int maxSlots = Integer.parseInt(parts[2].trim());
-                double fees = Integer.parseInt(parts[2].trim());
-
-                Spot spot = new Spot(type, spotId, fees/*, maxSlots*/);
-                spots.add(spot);
+                try {
+                    int spotId = Integer.parseInt(parts[0].trim()); //Integer.parseInt => to convert from String to Integer
+                    String type = parts[1].trim();
+                    double fees = Double.parseDouble(parts[2].trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Error parsing line: " + line);
+                }
             }
-        }catch(IOException e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Error reading the file: " + FilePaths.RESERVATIONS_FILE_PATH);
+            throw e;
         }
         return spots;
     }
@@ -28,16 +30,17 @@ public class spotManager {
     public void displayAvailableSpots(List<Spot> spots) {
         System.out.println("Spot ID       Spot Type       Fees");
         for (Spot spot : spots) {
-            if(spot.getId() != 0)
+            if (spot.getId() != 0) {
                 System.out.println(spot.getDetails());
+            }
         }
     }
+
     public void displaySpots(List<Spot> spots) {
         System.out.println("Spot ID       Spot Type       Fees");
-        for (int i =0 ; i < spots.toArray().length ; i++) {         /*Spot spot : spots*/
-                System.out.println((i+1) + ") " +spots.get(i).getDetails());
+        for (int i = 0; i < spots.size(); i++) {
+            System.out.println((i + 1) + ") " + spots.get(i).getDetails());
         }
-
     }
 
     public Spot getSpotById(List<Spot> spots, int spotId) {
@@ -46,15 +49,10 @@ public class spotManager {
                 return spot;
             }
         }
-        return null; // إذا لم يتم العثور على أي Spot
+        return null; // if it didn't find any spot , it will return null
     }
-    public void deleteSpot(List<Spot> spots , int spotId){
-        for (Spot spot : spots) {
-            if (spot.getId() == spotId) {
-                spot.setId(0);
-                spot.setType(null);
-                spot.setFees(0.0);
-            }
-        }
+
+    public void deleteSpot(List<Spot> spots, int spotId) {
+        spots.removeIf(spot -> spot.getId() == spotId);
     }
 }

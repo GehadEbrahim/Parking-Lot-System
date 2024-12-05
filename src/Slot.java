@@ -63,7 +63,7 @@ public class Slot {
 
     @Override
     public String toString() {
-        return "Slot ID: " + SlotID + ", Spot ID: " + SpotID + ", Date: " + Date + ", Time: " + StartTime + " - " + EndTime;
+        return "Slot ID: " + SlotID + ",    Spot ID: " + SpotID + ",    Date: " + Date + ",     Time: " + StartTime + " - " + EndTime;
     }
 
 }

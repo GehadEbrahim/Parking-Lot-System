@@ -5,10 +5,10 @@ import java.util.*;
 public class slotManager {
     public List<Slot> loadSlots(String filePath) throws IOException {
         List<Slot> slots = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/gebra/OneDrive/Desktop/PLS/Slots.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (line.startsWith("#") || line.trim().isEmpty()) continue; // تخطي التعليقات
+                if (line.startsWith("/") || line.trim().isEmpty()) continue;
 
                 String[] parts = line.split(",");
                 int slotId = Integer.parseInt(parts[0].trim());
