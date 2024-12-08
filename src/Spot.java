@@ -6,32 +6,32 @@ public class Spot {
     private ArrayList<Slot> slots;  // ArrayList to hold Slot objects
     private int slotCount; // how many slots are assigned
     private double fees;
+    private boolean isSpotReserved;
 
-    // Constructor
+    // Default Constructor
     public Spot() {
-        slots = new ArrayList<>();
+        slots = new ArrayList<Slot>();
+        this.slotCount = 0;
     }
 
+    // Parameterized Constructor
     public Spot(String Type, int Spot_ID, double fees) {
         this.Type = Type;
         this.Spot_ID = Spot_ID;
         this.fees = fees;
-        slots = new ArrayList<>();
-        this.slotCount = 0; // Start with 0 slots
+        this.slots = new ArrayList<Slot>();
+        this.slotCount = 0;
+        this.isSpotReserved = false; // Default to not reserved
     }
 
     // Add Slot to the Spot
     public boolean assignSlot(Slot slot) {
-        if (slotCount < 3) {  //Assume each spot has a max of 3 slots for example
+        if (slotCount < 3) {  // Assume each spot has a max of 3 slots
             slots.add(slot);
             slotCount++;
             return true;
         }
-        return false; // no space for more slots
-    }
-
-    public String getDetails() {
-        return "Spot ID: " + Spot_ID + ", Type: " + Type + ", Slots Assigned: " + slotCount;
+        return false; // No space for more slots
     }
 
     // Getters and setters
@@ -41,6 +41,10 @@ public class Spot {
 
     public void setType(String type) {
         this.Type = type;
+    }
+
+    public double getFees() {
+        return fees;
     }
 
     public void setFees(double fees) {
@@ -55,17 +59,36 @@ public class Spot {
         this.Spot_ID = spot_ID;
     }
 
+    public int getSlotCount() {
+        return slotCount;
+    }
+
+    public int getSpotID() {
+        return Spot_ID;
+    }
+
+    public ArrayList<Slot> getSlots() {
+        return slots;
+    }
+
+    public boolean isSpotReserved() {
+        return isSpotReserved;
+    }
+
+    public void setSpotReserved(boolean spotReserved) {
+        isSpotReserved = spotReserved;
+    }
+
+    // Check if the spot is full
+    public boolean isFull() {
+        return slotCount == 3;
+    }
+
     @Override
     public String toString() {
-        return "Spot ID: " + getId() + ", Type: " + getType() + ", Price: " + fees;
-    }
-
-    // Method to check if the spot is full "Chat GPT " لسه مش سألته بتعمل اي كنت بحل مشكلة الاول
-    public boolean isFull() {
-        return slotCount == slots.size();
-    }
-
-    public double getFees() {
-        return fees;
+        return "Spot ID: " + getId() + "\n" +
+                "Type: " + getType() + "\n" +
+                "Price: " + fees + "\n" +
+                "Reserved: " + isSpotReserved + "\n";
     }
 }
