@@ -1,21 +1,30 @@
-//Start Reservation class
-//I'll edit it, it's not the final virsion
-import java.io.*;
 public class Reservation {
 
     //Attributes of The Reservation Class
     private int ownerID;
     private int spotID;
-    private Spot spots[];
+    //private ArrayList<Spot> spots;
+    private String slotID;
     static int numOfReservation = 0;
 
     //Constructor
-    public Reservation(int ownerID , int spotID) {
+    public Reservation(String ownerName, int spotId, int slotId){
+        numOfReservation++;
+    }
+    public Reservation(int ownerID , int spotID , String slotID) {
         this.ownerID = ownerID;
         this.spotID = spotID;
         numOfReservation++;
     }
-    //# Methods of The Reservation Class
+
+    public void setOwnerID(int ownerID) {
+        this.ownerID = ownerID;
+    }
+
+    public void setSpotID(int spotID) {
+        this.spotID = spotID;
+    }
+//# Methods of The Reservation Class
 
     //## Setter methods of The Reservation Class
     public int getOwnerID(){
@@ -25,29 +34,12 @@ public class Reservation {
         return spotID;
     }
 
-    public void displaySpots(){
-                String filePath = "C:/Users/gebra//OneDrive/Desktop/PLS/Spots.txt";
+    //## to string method => we use it to display data from the document
+    @Override
+    public String toString() {
+        return "Owner ID :" + ownerID +"\n   Spot ID : " + spotID  +"\n " ;
+    }
 
-                try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                    String line;
-                    System.out.println("SpotID\tType\tFees");
-                    System.out.println("**********************");
-
-                    while ((line = br.readLine()) != null) {
-                        if (line.trim().isEmpty() || line.contains("****")) {
-                            continue;
-                        }
-                        String[] data = line.split(",");
-                        if (data.length == 3) {
-                            System.out.printf("%s\t%s\t%s%n", data[0].trim(), data[1].trim(), data[2].trim());
-                        } else {
-                            System.out.println(line.trim());
-                        }
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error reading the file: " + e.getMessage());
-                }
-        }
      //Other Methods +calculateFees() : double
   /*  public double calculateFees(int indexOfSpot ,Slot slots[]) { //I'll pass the indexOfSpot and the hours of the reservation to be able to calculate fees
         //هيختار هو عايز كام slot و انا هحسب الوقت الكلي و ابعته كـ parameter للـ function عشان تحسب الـ fees
@@ -70,4 +62,3 @@ public class Reservation {
     }*/
     //Other Methods
 }
-
