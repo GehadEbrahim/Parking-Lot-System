@@ -13,35 +13,34 @@ public class spotManager {
 
                 String[] parts = line.split(",");
                 try {
-                    int spotId = Integer.parseInt(parts[0].trim()); // Integer.parseInt to convert String to Integer
+                    int spotId = Integer.parseInt(parts[0].trim());
                     String type = parts[1].trim();
                     double fees = Double.parseDouble(parts[2].trim());
-
-                    // Creating Spot object and adding to the list
-                    spots.add(new Spot(type, spotId, fees)); // Add Spot to the list
+                    spots.add(new Spot(type, spotId, fees));
                 } catch (NumberFormatException e) {
                     System.out.println("Error parsing line: " + line);
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Error reading the file: " + filePath);  // Changed to use the provided filePath
-            throw e;
         }
         return spots;
     }
 
     public void displayAvailableSpots(List<Spot> spots) {
-        System.out.println("Spot ID       Spot Type       Fees");
+        boolean availableFound = false;
         for (Spot spot : spots) {
-            if (spot.getId() != 0) {  // Assuming spot ID 0 means empty or invalid spot
-                System.out.println(spot.getDetails());
+            if (!spot.isSpotReserved()) {
+                System.out.println(spot.toString());
+                availableFound = true;
             }
+        }
+        if (!availableFound) {
+            System.out.println("No available spots.");
         }
     }
 
-    public void displaySpots(List<Spot> spots){
+    public void displaySpots(List<Spot> spots) {
         for (int i = 0; i < spots.size(); i++) {
-            System.out.println((i + 1) + ") " + spots.get(i).getDetails());
+            System.out.println((i + 1) + ") " + spots.get(i).toString());
         }
     }
 
@@ -51,10 +50,10 @@ public class spotManager {
                 return spot;
             }
         }
-        return null;  // If no spot found, return null
+        return null;
     }
 
     public void deleteSpot(List<Spot> spots, int spotId) {
-        spots.removeIf(spot -> spot.getId() == spotId);  // Remove the spot by ID
+        spots.removeIf(spot -> spot.getId() == spotId);
     }
 }
