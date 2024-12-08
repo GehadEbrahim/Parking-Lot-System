@@ -1,46 +1,57 @@
-public class Reservation {
+import java.util.ArrayList;
 
-    //Attributes of The Reservation Class
-    private int ownerID;
+public class Reservation {
+    // Attributes of The Reservation Class
+    private String ownerName;
     private int spotID;
-    //private ArrayList<Spot> spots;
-    private String slotID;
+    private ArrayList<Integer> slotIDs; // لتخزين أكثر من Slot
     static int numOfReservation = 0;
 
-    //Constructor
-    public Reservation(String ownerName, int spotId, int slotId){
-        numOfReservation++;
-    }
-    public Reservation(int ownerID , int spotID , String slotID) {
-        this.ownerID = ownerID;
+    // Constructor
+    public Reservation(String ownerName, int spotID) {
+        this.ownerName = ownerName;
         this.spotID = spotID;
+        this.slotIDs = new ArrayList<>(); // تهيئة القائمة
         numOfReservation++;
     }
 
-    public void setOwnerID(int ownerID) {
-        this.ownerID = ownerID;
+    // Setter and Getter for Owner Name
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    // Setter and Getter for Spot ID
     public void setSpotID(int spotID) {
         this.spotID = spotID;
     }
-//# Methods of The Reservation Class
 
-    //## Setter methods of The Reservation Class
-    public int getOwnerID(){
-        return ownerID;
-    }
-    public int getSpotID(){
+    public int getSpotID() {
         return spotID;
     }
 
-    //## to string method => we use it to display data from the document
-    @Override
-    public String toString() {
-        return "Owner ID :" + ownerID +"\n   Spot ID : " + spotID  +"\n " ;
+    // Add a Slot ID
+    public void addSlotID(int slotID) {
+        slotIDs.add(slotID);
     }
 
-     //Other Methods +calculateFees() : double
+    // Get all Slot IDs
+    public ArrayList<Integer> getSlotIDs() {
+        return slotIDs;
+    }
+
+    // toString method to display reservation details
+    @Override
+    public String toString() {
+        return "Owner Name: " + ownerName +
+                "\nSpot ID: " + spotID +
+                "\nSlot IDs: " + slotIDs.toString();
+    }
+}
+//Other Methods +calculateFees() : double
   /*  public double calculateFees(int indexOfSpot ,Slot slots[]) { //I'll pass the indexOfSpot and the hours of the reservation to be able to calculate fees
         //هيختار هو عايز كام slot و انا هحسب الوقت الكلي و ابعته كـ parameter للـ function عشان تحسب الـ fees
         int hours = 5;
@@ -61,4 +72,4 @@ public class Reservation {
         return fees;
     }*/
     //Other Methods
-}
+
