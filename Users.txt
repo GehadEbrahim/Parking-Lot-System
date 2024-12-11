@@ -1,6 +1,0 @@
-# Index | Username  | Password  | ID   | Email
-0       | admin     | admin123  | 1000 | admin@example.com
-1       | mohamed   | pass123   | 1001 | mohamed@example.com
-2       | ahmed     | pass456   | 1002 | ahmed@example.com
-3       | hend      | pass789   | 1003 | hend@example.com
-4       | heba      | pass000   | 1004 | heba@example.com

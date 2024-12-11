@@ -26,17 +26,15 @@ public class LoginPage extends Application {
             String password = passwordField.getText();
 
             // اختبري Admin أو Owner هنا
-            User admin = new Admin("admin", "admin123");
-            User owner = new Owner(1, "owner@example.com", "owner", "owner123");
 
             // تحقق من المستخدم
-            if (admin.logIn(name, password) == 1) {
-                messageLabel.setText("Welcome Admin!");
-            } else if (owner.logIn(name, password) == 1) {
-                messageLabel.setText("Welcome Owner!");
-            } else {
-                messageLabel.setText("Invalid username or password. Try again!");
-            }
+//            if (admin.logIn(name, password) == 1) {
+//                messageLabel.setText("Welcome Admin!");
+//            } else if (owner.logIn(name, password) == 1) {
+//                messageLabel.setText("Welcome Owner!");
+//            } else {
+//                messageLabel.setText("Invalid username or password. Try again!");
+//            }
         });
 
         // تصميم الواجهة

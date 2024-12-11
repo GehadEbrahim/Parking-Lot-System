@@ -5,6 +5,6 @@ public abstract class User {
         this.name = name;
         this.password = password;
     }
-    public abstract int logIn(String name , String password);
-    public abstract void logOut(String name , String password);
+    abstract public int logIn(String name, String password);
+    // public abstract void logOut(String name , String password);
 }

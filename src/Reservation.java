@@ -1,70 +1,55 @@
-import java.io.*;
-public class Reservation {
 
-    //Attributes of The Reservation Class
-    private int ownerID;
-    private int spotID;
-    private Spot spots[];
+import java.util.ArrayList;
+
+public class Reservation {
+    // Attributes of The Reservation Class
+    Spot spot;
+    private Owner owner =new Owner(Main.owners.get(Main.index).getID() , Main.owners.get(Main.index).getEmail() ,Main.owners.get(Main.index).name ,Main.owners.get(Main.index).password ,Main.owners.get(Main.index).getPhone());
+    private ArrayList<Integer> slotIDs;
     static int numOfReservation = 0;
 
-    //Constructor
-    public Reservation(int ownerID , int spotID) {
-        this.ownerID = ownerID;
-        this.spotID = spotID;
+    // Constructor
+    public Reservation(String ownerName, int spotID) {
+        owner.name = ownerName;
+        this.spot = new Spot();
+        this.spot.setId(spotID);
+        this.slotIDs = new ArrayList<>();
         numOfReservation++;
     }
-    //# Methods of The Reservation Class
 
-    //## Setter methods of The Reservation Class
-    public int getOwnerID(){
-        return ownerID;
-    }
-    public int getSpotID(){
-        return spotID;
+    // Setter and Getter for Owner Name
+    public void setOwnerName(String ownerName) {
+        owner.name = ownerName;
     }
 
-    public void displaySpots(){
-                String filePath = "C:/Users/gebra//OneDrive/Desktop/PLS/Spots.txt";
-
-                try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                    String line;
-                    System.out.println("SpotID\tType\tFees");
-                    System.out.println("**********************");
-
-                    while ((line = br.readLine()) != null) {
-                        if (line.trim().isEmpty() || line.contains("****")) {
-                            continue;
-                        }
-                        String[] data = line.split(",");
-                        if (data.length == 3) {
-                            System.out.printf("%s\t%s\t%s%n", data[0].trim(), data[1].trim(), data[2].trim());
-                        } else {
-                            System.out.println(line.trim());
-                        }
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error reading the file: " + e.getMessage());
-                }
-        }
-     //Other Methods +calculateFees() : double
-  /*  public double calculateFees(int indexOfSpot ,Slot slots[]) { //I'll pass the indexOfSpot and the hours of the reservation to be able to calculate fees
-        //هيختار هو عايز كام slot و انا هحسب الوقت الكلي و ابعته كـ parameter للـ function عشان تحسب الـ fees
-        int hours = 5;
-        setFees(0);
-        if(spotID >=1 && spotID <= 10){
-            setFees(20 * hours);
-        }
-        else if(spotID >=11 && spotID <= 20){
-            setFees(10 * hours);
-        }
-       else{
-            setFees(30 * hours);
-        }
-       return getFees();
+    public String getOwnerName() {
+        return owner.name;
     }
 
-    public double getFees() {
-        return fees;
-    }*/
-    //Other Methods
+    // Setter and Getter for Spot ID
+    public void setSpotID(int spotID) {
+        this.spot.setId(spotID);
+    }
+
+    public int getSpotID() {
+        return spot.getSpotID();
+    }
+
+    // Add a Slot ID
+    public void addSlotID(int slotID) {
+        slotIDs.add(slotID);
+    }
+
+    // Get all Slot IDs
+    public ArrayList<Integer> getSlotIDs() {
+        return slotIDs;
+    }
+
+    // toString method to display reservation details
+    @Override
+    public String toString() {
+        return "Owner Name: " + owner.name +
+                "\nSpot ID: " + spot.getId() +
+                "\nSlot IDs: " + slotIDs;
+    }
 }
