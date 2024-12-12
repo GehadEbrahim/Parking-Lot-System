@@ -1,6 +1,4 @@
-0,Mohamed,pass123,564254,mohamed@example.com
-1,Ahmed,pass456,562878,ahmed@example.com
-2,Hend,pass789,568711,hend@example.com
-3,Heba,pass000,568714,heba@example.com
-4,Ali,pass618,568825,ali@example.com
-5,Gehad,gehad2000,12554254,gehad@gmail.com
+1       , mohamed   , pass123   , 1001 , mohamed@example.com
+2       , ahmed     , pass456   , 1002 , ahmed@example.com
+3       , hend      , pass789   , 1003 , hend@example.com
+4       , heba      , pass000   , 1004 , heba@example.com
