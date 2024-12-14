@@ -51,39 +51,44 @@ public class AdminManager {
         }
     }
     private void displayMenu() throws IOException {
-        System.out.println("What do you want to display?");
-        System.out.println("1) Owner");
-        System.out.println("2) Slot");
-        System.out.println("3) Spot");
-        System.out.println("4) Vehicle");
-        System.out.println("5) Reservations");
-        System.out.print(" ==> ");
-        int displayChoice = Integer.parseInt(in.nextLine());
+//        String ans = "y";
+//        while (ans.toLowerCase().equals("y")) {
+            System.out.println("What do you want to display?");
+            System.out.println("1) Owner");
+            System.out.println("2) Slot");
+            System.out.println("3) Spot");
+            System.out.println("4) Vehicle");
+            System.out.println("5) Reservations");
+            System.out.print(" ==> ");
+            int displayChoice = Integer.parseInt(in.nextLine());
 
-        switch (displayChoice) {
-            case 1:
-                System.out.println("\t\t\t\t\t\tDisplaying Owners...");
-                Main.ownerManager.displayOwners(Main.owners);
-                break;
-            case 2:
-                System.out.println("\t\t\t\t\t\tDisplaying Slots...\n");
-                Main.slotManager.displaySlots(Main.slots);
-                break;
-            case 3:
-                System.out.println("\t\t\t\t\t\tDisplaying Spots...\n");
-                Main.spotManager.displaySpots(Main.spots);
-                break;
-            case 4:
-                System.out.println("\t\t\t\t\t\tDisplaying Vehicles...");
-                Main.vehicle.displayVehicles(Main.vehicles);
-                break;
-            case 5:
-                System.out.println("\t\t\t\t\t\tDisplaying Reservations...");
-                Main.reservationManager.displayReservations();
-                break;
-            default:
-                System.out.println("\t\t\t\t\t\tInvalid choice.");
-                break;
+            switch (displayChoice) {
+                case 1:
+                    System.out.println("\t\t\t\t\t\tDisplaying Owners...");
+                    Main.ownerManager.displayOwners(Main.owners);
+                    break;
+                case 2:
+                    System.out.println("\t\t\t\t\t\tDisplaying Slots...\n");
+                    Main.slotManager.displaySlots(Main.slots);
+                    break;
+                case 3:
+                    System.out.println("\t\t\t\t\t\tDisplaying Spots...\n");
+                    Main.spotManager.displaySpots(Main.spots);
+                    break;
+                case 4:
+                    System.out.println("\t\t\t\t\t\tDisplaying Vehicles...");
+                    Main.vehicle.displayVehicles(Main.vehicles);
+                    break;
+                case 5:
+                    System.out.println("\t\t\t\t\t\tDisplaying Reservations...");
+                    Main.reservationManager.displayReservations();
+                    break;
+                default:
+                    System.out.println("\t\t\t\t\t\tInvalid choice.");
+                    break;
+//            }
+//            System.out.println("Bake to the main menu? (y/n)");
+//            System.out.print(" ==> "); ans=in.next();
         }
     }
     public void deleteEntity() throws IOException {

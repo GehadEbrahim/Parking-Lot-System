@@ -108,6 +108,6 @@ public class Spot {
     }
     @Override
     public String toString() { //Owner
-        return getId()+","+getType()+","+fees+","+isSpotReserved;
+        return getId() + "," + getType() + "," + fees + "," + isSpotReserved;
     }
 }

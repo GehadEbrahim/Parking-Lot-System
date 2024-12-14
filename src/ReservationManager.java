@@ -59,16 +59,14 @@ public class ReservationManager {
                     break;
                 case 2:
                     System.out.println("For which vehicle you want to make a reservation?");
-                    Main.vehicle.displayOwnerVehicles(Main.index);
-//                    System.out.println("For which vehicle you want to make a reservation?");
-//                    for (int i = 0; i < Main.vehicles.size(); i++) {
-//                        System.out.println((i + 1) + ") " + Main.vehicles.get(i).vehicleDetails());
-//                    }
+                    Main.vehicle.displayOwnerVehicles(Main.name);
                     System.out.print(" ==> ");
-                    int vehicleChoice = in.nextInt();
-                    String vehicleType = Main.vehicles.get(vehicleChoice).getType();
+                    int vehicleChoice = in.nextInt()-1;
+                    String vehicleType =  Main.vehicles.get(vehicleChoice).getType();
+                    System.out.println("Vehicle Type => " +vehicleType);
                     String licenceNumber = Main.vehicles.get(vehicleChoice).getLicence_number();
-                    if (vehicleChoice < 1 || vehicleChoice > Main.vehicles.size()) {
+                    System.out.println("License Number => " +licenceNumber);
+                    if (vehicleChoice < 0 || vehicleChoice >= Main.vehicles.size()) {
                         System.out.println("Invalid choice. Please try again.");
                         return;
                     }
@@ -78,14 +76,8 @@ public class ReservationManager {
 
                     Main.slotManager.displayAvailableSlots(Main.slots, spotChoice);
                     System.out.println("Enter the slot IDs you want to reserve (comma-separated):");
-                    String slotInput = in.next();
-                    String[] slotStrings = slotInput.split(",");
-                    List<Integer> slotIDs = new ArrayList<>();
-                    for (String s : slotStrings) {
-                        slotIDs.add(Integer.parseInt(s.trim()));
-                    }
 
-                    makeReservation(Main.name, spotChoice, slotIDs, vehicleType, licenceNumber);
+                    makeReservation(Main.name, spotChoice /*, slotIDs ,*/ vehicleType, licenceNumber);
                     break;
                 case 3:
                     // Implement the update reservation functionality
@@ -107,24 +99,9 @@ public class ReservationManager {
         System.out.println("Returning to the main menu...");
     }
 
-    public void makeReservation(String name, int spotID, List<Integer> slotIDs, String vehicleType, String licenceNumber) {
+    public void makeReservation(String name, int spotID, /**/, String vehicleType, String licenceNumber) {
         LocalDate today = LocalDate.of(2024, 10, 30); // Assume today's date is 30-11-2024
-        Reservation reservation = new Reservation(Main.name, spotID, slotIDs ,vehicleType, licenceNumber);
-
-        for (int slotID : slotIDs) {
-            Slot slot = Main.slotManager.getSlotById(Main.slots, slotID);
-
-            if (slot != null) {
-                LocalDate slotDate = slot.getDate();
-                if (slotDate.isEqual(today) || slotDate.isBefore(today.minusDays(2))) {
-                    System.out.println("Cannot reserve slot " + slotID + " as it is either today or too soon. Please choose a date 3 or more days before or after today.");
-                    return;
-                }
-                reservation.addSlotID(slotID);
-            } else {
-                System.out.println("Slot with ID " + slotID + " not found.");
-            }
-        }
+        Reservation reservation = new Reservation(Main.name, spotID,  ,vehicleType, licenceNumber);
 
         reservations.add(reservation);
         System.out.println("Reservation Done!");

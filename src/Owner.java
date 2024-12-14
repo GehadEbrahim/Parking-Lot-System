@@ -5,7 +5,6 @@ public class Owner extends User{
     private int ID;
     private int phone;
     private String email;
-    private ArrayList<Vehicle> vehicles = new ArrayList<>();
     private ArrayList<Reservation> reservationArray = new ArrayList<>(); // Dynamic array for reservations
     //private float wallet;
 
@@ -22,19 +21,6 @@ public class Owner extends User{
 
     public String getEmail() {
         return email;
-    }
-
-    public void addVehicle(Vehicle vehicle) {
-        if (vehicles.size() < 3) {
-            vehicles.add(vehicle);
-            System.out.println("Vehicle added successfully!");
-        } else {
-            System.out.println("You cannot add more than 3 vehicles.");
-        }
-    }
-
-    public ArrayList<Vehicle> getVehicles() {
-        return vehicles;
     }
 
     public int getID() {
@@ -73,16 +59,13 @@ public class Owner extends User{
         this.email = email;
     }
 
-    public void setVehicles(ArrayList<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-
     public String getOwnerDetails(){
-      return "Name: " +name +"\n" +
-                "   Password: " + password +"\n" +
-                "   ID: " + ID + "\n" +
-                "   Phone number: " + phone + "\n" +
-                "   Email: " + email + "\n";
+      return
+                "Name: " +name +"\n" +
+                "Password: " + password +"\n" +
+                "ID: " + ID + "\n" +
+                "Phone number: " + phone + "\n" +
+                "Email: " + email + "\n";
     }
 //Methods
 

@@ -31,8 +31,6 @@ public class Main {
             System.out.println("Error loading data: " + e.getMessage());
         }
         try {
-            System.out.println("Vehicles loaded: " + Main.vehicles.size());
-
             startLog();
         } catch (Exception e) {
             System.out.print("An error occurred: " + e.getMessage());
@@ -42,6 +40,7 @@ public class Main {
         generalFunctions.WriteInFile(FilePaths.RESERVATIONS_FILE_PATH , reservations);
         generalFunctions.WriteInFile(FilePaths.SPOTS_FILE_PATH , spots);
         generalFunctions.WriteInFile(FilePaths.SLOTS_FILE_PATH , slots);
+        generalFunctions.WriteInFile(FilePaths.VEHICLES_FILE_PATH , vehicles);
 
     }
 

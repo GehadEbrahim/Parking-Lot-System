@@ -29,7 +29,7 @@ public class SpotManager {
         boolean availableFound = false;
         for (Spot spot : spots) {
             if (!spot.isFull() && spot.getType().toUpperCase().equals(type)){
-                System.out.println(spot.toString());
+                System.out.println(spot.SpotDetails());
                 availableFound = true;
             }
         }

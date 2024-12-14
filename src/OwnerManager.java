@@ -47,10 +47,12 @@ public class OwnerManager {
     public void menu() throws IOException {
         while (true) {
                 System.out.println("1) Show my account");
-                System.out.println("2) Reservations");
-                System.out.println("3) Rewards");
-                System.out.println("4) Log out");
-                System.out.println("5) Delete my account");
+                System.out.println("2) Edit my account");
+                System.out.println("3) Add vehicles");
+                System.out.println("4) Reservations");
+                System.out.println("5) Rewards");
+                System.out.println("6) Log out");
+                System.out.println("7) Delete my account");
                 System.out.println("\n");
                 System.out.print(" ==> ");
 
@@ -60,16 +62,22 @@ public class OwnerManager {
                     Main.owners.get(Main.index).displayDetails();
                     break;
                 case 2:
-                    Main.reservationManager.reservationMenu();
+                    this.editProfile();
                     break;
                 case 3:
-                    //rewards
+                    Main.vehicle.addVehicle();
                     break;
                 case 4:
+                    Main.reservationManager.reservationMenu();
+                    break;
+                case 5:
+                    //rewards
+                    break;
+                case 6:
                     System.out.println("\t\t\t\t\t\tLogging out.....\n\t\t\t\t\t\t\t\tGoodbye!");
                     Main.name = null;
                     return;
-                case 5:
+                case 7:
                     String deleteChoice;
                     System.out.println("Are you sure you want to delete your account?(y/n)");
                     System.out.print(" ==> ");
@@ -83,6 +91,45 @@ public class OwnerManager {
                     System.out.print("Invalid choice. Please enter a valid number");
             }
         }
+    }
+    public void editProfile(){
+        System.out.println("What do you want to edit?");
+        System.out.println("1) Name");
+        System.out.println("2) Password");
+        System.out.println("3) Email");
+        System.out.println("4) Phone number");
+        System.out.println(" ==> ");
+
+        int editChoice = in.nextInt();
+        switch (editChoice){
+            case 1:
+                System.out.print("Enter the new name: ");
+                String name = in.next();
+                Main.owners.get(Main.index).setName(name);
+                System.out.println("Name changed successfuly!\n");
+                break;
+            case 2:
+                System.out.print("Enter the new password: ");
+                String pass = in.next();
+                Main.owners.get(Main.index).setPassword(pass);
+                System.out.println("Password changed successfuly!\n");
+                break;
+            case 3:
+                System.out.print("Enter the new email: ");
+                String email = in.next();
+                Main.owners.get(Main.index).setEmail(email);
+                System.out.println("Email changed successfuly!\n");
+                break;
+            case 4:
+                System.out.print("Enter the new phone number: ");
+                int phone = in.nextInt();
+                Main.owners.get(Main.index).setPhone(phone);
+                System.out.println("Phone number changed successfuly!\n");
+                break;
+            default:
+                System.out.println("Invalid Choice!");
+        }
+
     }
     public void Register(){
         System.out.print("Enter your name: ");

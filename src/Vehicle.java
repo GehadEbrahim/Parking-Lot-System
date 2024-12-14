@@ -5,6 +5,7 @@ public class Vehicle {
     private String licence_number;
     private String ownerName;
     private String Type;
+    private int vehicleId;
 
     Scanner in = new Scanner(System.in);
 
@@ -14,7 +15,8 @@ public class Vehicle {
 
     }
 
-    public Vehicle(String ownerName, String licence_number, String type) {
+    public Vehicle(int vehicleId ,String ownerName, String licence_number, String type) {
+        this.vehicleId = vehicleId;
         this.licence_number = licence_number;
         this.ownerName = ownerName;
         this.Type = type;
@@ -29,7 +31,7 @@ public class Vehicle {
                     continue;
                 }
                 String[] parts = line.split(",");
-                vehicles.add(new Vehicle(parts[0].trim() , parts[1].trim(), parts[2].trim()));
+                vehicles.add(new Vehicle( Integer.parseInt(parts[0].trim()) ,parts[1].trim() , parts[2].trim(), parts[3].trim()));
             }
         }catch (IOException e){
             System.out.println("Error reading the file: " + filepath + e.getMessage());  // Changed to use the provided filePath
@@ -40,7 +42,7 @@ public class Vehicle {
         this.licence_number = licence_number;
     }
 
-    public void setOwner_id(String ownerName) {
+    public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
 
@@ -60,11 +62,12 @@ public class Vehicle {
         return Type;
     }
 
+    public int getVehicleId() {
+        return vehicleId;
+    }
 
-    public void displayVehicleDetails() {
-        System.out.println("nOwner Id : " + ownerName +
-                "\nLicense Number :" + licence_number +
-                "\nVehicle type : " + Type);
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public void addVehicle(){
@@ -73,50 +76,56 @@ public class Vehicle {
 
         for (int i = 0; i < vehicleCount; i++) {
             System.out.println("Enter details for vehicle " + (i + 1) + ":");
-            System.out.print("License Number: ");
-            String licenseNumber = in.next();
             System.out.print("Vehicle Type (large, bike, normal): ");
             String type = in.next().toLowerCase();
-            Vehicle vehicle = new Vehicle( Main.owners.get(Main.index).name, licenseNumber, type);
+            System.out.print("License Number: ");
+            String licenseNumber = in.next();
+            Vehicle vehicle = new Vehicle(Main.vehicles.size() + 1 , Main.owners.get(Main.index).name , licenseNumber, type);
             Main.vehicles.add(vehicle);
+            System.out.println("Vehicle added successfully!\n-----------------------------");
         }
     }
     public String vehicleDetails(){
-        return "Vehicle Details:\n" +
+        return "Vehicle Details:\n------------\n" +
+                "Vehicle ID: " + vehicleId +"\n"+
                 "Owner name: " + ownerName + "\n" +
                 "License Number: " + licence_number + "\n" +
                 "Vehicle Type: " + Type +"\n";
     }
     public void displayVehicles(List<Vehicle> vehicles) {
+        int indexVehicle = 1;
         if (Main.vehicles.isEmpty()) {
             System.out.println("No vehicles found.");
         } else {
             for (Vehicle vehicle : Main.vehicles) {
-                System.out.println(vehicle.vehicleDetails());
+                System.out.println(indexVehicle + ") " +vehicle.vehicleDetails());
+                indexVehicle++;
             }
         }
     }
-     public void displayOwnerVehicles(int ownerId){
-     if (Main.vehicles.isEmpty()) {
-        System.out.println("No vehicles found.");
-     } else {
-            for (Vehicle vehicle : Main.vehicles) {
-                if(Main.index == ownerId)
-                     System.out.println(vehicle.vehicleDetails());
-                else {
-                    System.out.println("No vehicles found.\nDo you want to add a vehicle? (y/n)");
-                    String ownerAns = in.next();
-                    if (ownerAns.toLowerCase().equals("y"))
-                        Main.vehicle.addVehicle();
-                    else
-                        return;
-                }
+    public void displayOwnerVehicles(String ownerName) {
+        boolean found = false;
+        for (Vehicle vehicle : Main.vehicles) {
+            if (vehicle.getOwnerName().toLowerCase().equals(ownerName.toLowerCase())) {
+                System.out.println((vehicle.vehicleDetails()));
+                found = true;
             }
-     }
-}
-    @Override
-    public String toString(){
-        return ownerName + "," + Type +"," + licence_number;
+        }
+        if (!found) {
+            System.out.println("No vehicles found.\nDo you want to add a vehicle? (y/n)");
+            String ownerAns = in.next();
+            if (ownerAns.equalsIgnoreCase("y")) {
+                Main.vehicle.addVehicle();
+            }
+            System.out.println("For which vehicle you want to make a reservation?");
+            Main.vehicle.displayOwnerVehicles(Main.name);
+        }
     }
 
+    @Override
+    public String toString(){
+        return vehicleId+","+ownerName + "," + Type +"," + licence_number;
+    }
 }
+
+

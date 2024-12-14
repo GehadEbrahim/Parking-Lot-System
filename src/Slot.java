@@ -82,7 +82,7 @@ public class Slot {
         this.isReserved = isReserved;
     }
 
-    public String slotDetails(){
+    public String slotDetails(){ //Owner => as we will display only the available slots not all
         return "Slot Details:\n" +
                 "Slot ID: " + slotId + "\n" +
                 "Spot ID: " + spotId + "\n" +
@@ -101,7 +101,7 @@ public class Slot {
     }
         // Override toString()
     @Override
-    public String toString() { //Owner => as we will display only the available slots not all
-        return spotId+","+slotId+","+date+","+startTime+","+endTime+","+isReserved;
+    public String toString() {
+        return spotId + "," + slotId + "," + date + "," + startTime + "," + endTime + "," + isReserved;
     }
 }

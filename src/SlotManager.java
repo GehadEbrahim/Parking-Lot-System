@@ -27,8 +27,8 @@ public class SlotManager {
     public void displaySlots(List<Slot> slots) {
         for (int i = 0 , num = 1; i < slots.size(); i++ , num++) {
             if(num == 4){
-                num = 1;
-            System.out.println(num + ") " + slots.get(i).allSlotDetails());
+                num = 1; // to just display 1 ,2 ,3
+            System.out.println((i+1) + ") " + slots.get(i).allSlotDetails());
             }
         }
     }
