@@ -25,27 +25,34 @@ public class OwnerManager {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading the file: " + filePath);  // Changed to use the provided filePath
-            throw e;
+            System.out.println("Error reading the file: " + filePath + e.getMessage());  // Changed to use the provided filePath
         }
         return owners;
     }
     public void displayOwners(List<Owner> owners){
         for (int i = 0; i < owners.size(); i++) {
-            System.out.println((i + 1) + ") " + owners.get(i).toString());
+            System.out.println((i + 1) + ") " + owners.get(i).getOwnerDetails());
         }
     }
+//    public void displayOwnerVehicle() {
+//        if (Main.owners.get(Main.index).getVehicles().isEmpty()) {
+//            System.out.println("No vehicles associated with this owner.");
+//        } else {
+//            System.out.println("Vehicles : ");
+//            for (Vehicle vehicle : Main.vehicles) {
+//                vehicle.displayVehicleDetails();
+//            }
+//        }
+//    }
     public void menu() throws IOException {
         while (true) {
                 System.out.println("1) Show my account");
-                System.out.println("2) Make a reservation");
-                System.out.println("3) Cancel a reservation");
-                System.out.println("4) Update a reservation");
-                System.out.println("5) Rewards");
-                System.out.println("6) Log out");
-                System.out.println("7) Delete my account");
+                System.out.println("2) Reservations");
+                System.out.println("3) Rewards");
+                System.out.println("4) Log out");
+                System.out.println("5) Delete my account");
                 System.out.println("\n");
-                System.out.print("Enter your choice: ");
+                System.out.print(" ==> ");
 
             int menuOwnerChoice = in.nextInt();
             switch (menuOwnerChoice) {
@@ -53,57 +60,42 @@ public class OwnerManager {
                     Main.owners.get(Main.index).displayDetails();
                     break;
                 case 2:
-                    Main.reservationManager.reservation();
+                    Main.reservationManager.reservationMenu();
                     break;
                 case 3:
-                    //
-                    break;
-                case 4:
-                    //edit
-                    break;
-                case 5:
                     //rewards
                     break;
-                case 6:
-                    System.out.println("Logging out...");
+                case 4:
+                    System.out.println("\t\t\t\t\t\tLogging out.....\n\t\t\t\t\t\t\t\tGoodbye!");
+                    Main.name = null;
                     return;
-                case 7:
+                case 5:
                     String deleteChoice;
                     System.out.println("Are you sure you want to delete your account?(y/n)");
                     System.out.print(" ==> ");
                     deleteChoice = in.next();
                     Main.owners.remove(Main.index); //delete the owner who has logged in
                     System.out.println("Your account has been deleted.");
-                    System.out.println("Logging out...");
+                    System.out.println("\t\t\t\t\t\tLogging out.....\n\t\t\t\t\t\t\t\tGoodbye!");
+                    Main.name = null;
                     return;
                 default:
                     System.out.print("Invalid choice. Please enter a valid number");
-
             }
         }
     }
     public void Register(){
         System.out.print("Enter your name: ");
         String name = in.next();
+        Main.name = name;
         System.out.print("Create your password: ");
         String pass = in.next();
         System.out.print("Enter your emial: ");
         String email = in.next();
         System.out.print("Enter your phone number: ");
         int number = in.nextInt();
-        Main.owners.add(new Owner(Main.owners.size() , email , name , pass , number));
+        Main.index = Main.owners.size();
+        Main.owners.add(new Owner(Main.index , email , name , pass , number));
+        Main.vehicle.addVehicle();
     }
-    public void saveOwners(String filePath) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (Owner owner : Main.owners) {
-                bw.write(owner.getID() + "," +
-                        owner.name + "," +
-                        owner.password + "," +
-                        owner.getPhone() + "," +
-                        owner.getEmail());
-                bw.newLine();
-            }
-        }
-    }
-
 }

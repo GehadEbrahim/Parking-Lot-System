@@ -1,4 +1,0 @@
-Mohamed,24,1,2,3,large,ABC123
-Ahmed,1,1,2,normal,DEF456
-Hend,12,2,3,bike,GHI789
-Heba,23,1,large,JKL012

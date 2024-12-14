@@ -40,7 +40,7 @@ public class SpotManager {
 
     public static void displaySpots(List<Spot> spots) {
         for (int i = 0; i < spots.size(); i++) {
-            System.out.println((i + 1) + ") " + spots.get(i).toStringAll());
+            System.out.println((i + 1) + ") " + spots.get(i).AllSpotDetails());
         }
     }
 
@@ -57,4 +57,43 @@ public class SpotManager {
     public void deleteSpot(List<Spot> spots, int spotId) {
         spots.removeIf(spot -> spot.getId() == spotId);
     }
+//    public void saveSpots(String filePath) throws IOException {
+//        // قراءة البيانات الموجودة في الملف أولاً
+//        List<Spot> spotsList = new ArrayList<>();
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] parts = line.split(",");
+//                int id = Integer.parseInt(parts[0]);
+//                String type = parts[1];
+//                double fees = Double.parseDouble(parts[2]);
+//                boolean isReserved = Boolean.parseBoolean(parts[3]);
+//
+//                spotsList.add(new Spot(id, type, fees, isReserved));
+//
+//            }
+//        }
+//
+//        // التحديثات التي قمت بها على spotsList (مثل التعديلات في Main.spots)
+//        // (بافتراض أن التعديلات قد تمت على Main.spots مسبقاً)
+//
+//        // كتابة البيانات المعدلة إلى الملف
+//        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+//            for (Spot spot : spotsList) {
+//                bw.write(spot.getId() + "," + spot.getType() + "," + spot.getFees() + "," + spot.isSpotReserved());
+//                bw.newLine();
+//            }
+//        }
+//    }
+//public void saveSpots(String filePath) throws IOException{
+//    try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))){
+//        for (Spot spot : Main.spots){
+//            bw.write( spot.getId() +"," +
+//                    spot.getType() + "," +
+//                    spot.getFees() + ","+
+//                    spot.isSpotReserved());
+//        }
+//    }
+//}
+
 }

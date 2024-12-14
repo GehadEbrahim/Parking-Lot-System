@@ -28,7 +28,7 @@ public class SlotManager {
         for (int i = 0 , num = 1; i < slots.size(); i++ , num++) {
             if(num == 4){
                 num = 1;
-            System.out.println(num + ") " + slots.get(i).toStringAll() );
+            System.out.println(num + ") " + slots.get(i).allSlotDetails());
             }
         }
     }
@@ -37,7 +37,7 @@ public class SlotManager {
         System.out.println("Available Slots for Spot ID " + spotId + ":");
         for (Slot slot : slots) {
             if (slot.getSpotId() == spotId && !slot.isReserved()) {
-                System.out.println(slot.toString());
+                System.out.println(slot.slotDetails());
             }
         }
     }
@@ -51,6 +51,45 @@ public class SlotManager {
         }
         return null;
     }
+
+//    public void saveSlots(String filePath) throws IOException {
+//        List<String> updatedLines = new ArrayList<>();
+//        boolean slotUpdated = false;
+//
+//        // قراءة البيانات الحالية من الملف
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                updatedLines.add(line);
+//            }
+//        }
+//
+//        // فتح الملف للكتابة من جديد
+//        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+//            for (Slot slot : Main.slots) {
+//                String slotData = slot.getSlotId() + "," +
+//                        slot.getSpotId() + "," +
+//                        slot.getDate() + "," +
+//                        slot.getStartTime() + "," +
+//                        slot.getEndTime() + "," +
+//                        slot.isReserved();
+//                // البحث إذا كان هذا الـ Slot موجود مسبقًا
+//                boolean found = false;
+//                for (String existingLine : updatedLines) {
+//                    if (existingLine.contains(String.valueOf(slot.getSlotId()))) {
+//                        found = true;
+//                        break;
+//                    }
+//                }
+//                // إذا لم يتم العثور على الـ Slot، نضيفه
+//                if (!found) {
+//                    bw.write(slotData);
+//                    bw.newLine();
+//                }
+//            }
+//        }
+//    }
+
 }
 
 

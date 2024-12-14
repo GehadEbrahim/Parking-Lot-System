@@ -78,13 +78,11 @@ public class Slot {
         this.endTime = endTime;
     }
 
-    public void setReserved(boolean isReserved) {
+    public void setReserved(boolean isReserved){
         this.isReserved = isReserved;
     }
 
-    // Override toString()
-    @Override
-    public String toString() { //Owner => as we will display only the available slots not all
+    public String slotDetails(){
         return "Slot Details:\n" +
                 "Slot ID: " + slotId + "\n" +
                 "Spot ID: " + spotId + "\n" +
@@ -92,7 +90,7 @@ public class Slot {
                 "Start Time: " + startTime + "\n" +
                 "End Time: " + endTime + "\n";
     }
-    public String toStringAll() { //Admin => he will see all slots and he want to know either reserved or not
+    public String allSlotDetails(){
         return "Slot Details:\n" +
                 "Slot ID: " + slotId + "\n" +
                 "Spot ID: " + spotId + "\n" +
@@ -100,5 +98,10 @@ public class Slot {
                 "Start Time: " + startTime + "\n" +
                 "End Time: " + endTime + "\n" +
                 "Reserved: " + isReserved + "\n";
+    }
+        // Override toString()
+    @Override
+    public String toString() { //Owner => as we will display only the available slots not all
+        return spotId+","+slotId+","+date+","+startTime+","+endTime+","+isReserved;
     }
 }

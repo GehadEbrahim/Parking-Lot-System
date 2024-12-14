@@ -4,7 +4,6 @@ import java.io.*;
 
 public class AdminManager {
     private Scanner in = new Scanner(System.in);
-
     public void meanFunction() throws IOException {
         System.out.println("\n1) Profile");
         System.out.println("2) Delete");
@@ -12,7 +11,7 @@ public class AdminManager {
         System.out.println("4) Display");
         System.out.println("5) Update");
         System.out.println("6) The total amount");
-        System.out.println("7) Exit");
+        System.out.println("7) Logout");
         System.out.print(" ==> ");
         int menuChoice = 0;
         try {
@@ -44,6 +43,7 @@ public class AdminManager {
                 break;
             case 7:
                 System.out.println("\t\t\t\t\t\tExiting the program.\n\t\t\t\t\t\t\t\tGoodbye!");
+                Main.name = null;
                 return;
             default:
                 System.out.println("\t\t\t\t\t\tInvalid choice. Please try again.");
@@ -56,6 +56,7 @@ public class AdminManager {
         System.out.println("2) Slot");
         System.out.println("3) Spot");
         System.out.println("4) Vehicle");
+        System.out.println("5) Reservations");
         System.out.print(" ==> ");
         int displayChoice = Integer.parseInt(in.nextLine());
 
@@ -74,6 +75,11 @@ public class AdminManager {
                 break;
             case 4:
                 System.out.println("\t\t\t\t\t\tDisplaying Vehicles...");
+                Main.vehicle.displayVehicles(Main.vehicles);
+                break;
+            case 5:
+                System.out.println("\t\t\t\t\t\tDisplaying Reservations...");
+                Main.reservationManager.displayReservations();
                 break;
             default:
                 System.out.println("\t\t\t\t\t\tInvalid choice.");

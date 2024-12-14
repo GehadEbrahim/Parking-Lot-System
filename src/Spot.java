@@ -24,6 +24,13 @@ public class Spot {
         this.isSpotReserved = false; // Default to not reserved
     }
 
+    public Spot(int spot_ID,  String type,  double fees, boolean isSpotReserved){
+        this.fees = fees;
+        this.isSpotReserved = isSpotReserved;
+        Spot_ID = spot_ID;
+        Type = type;
+    }
+
     // Add Slot to the Spot
     public boolean assignSlot(Slot slot) {
         for (int i = 0; i < slots.size(); i++) {
@@ -45,6 +52,9 @@ public class Spot {
     }
 
     public double getFees() {
+//        if(Main.owners.get(Main.index).getVehicle().toLowerCase().equals("normal")) {
+//            return "function calculat"
+//        }
         return fees;
     }
 
@@ -85,16 +95,19 @@ public class Spot {
         return slotCount == 3; //if slotCount == 3 => return true
     }
 
-    @Override
-    public String toString() { //Owner
+    public String SpotDetails(){
         return "Spot ID: " + getId() + "\n" +
                 "Type: " + getType() + "\n" +
                 "Price: " + fees + "\n";
     }
-    public String toStringAll() { //admin
+    public String AllSpotDetails(){
         return "Spot ID: " + getId() + "\n" +
                 "Type: " + getType() + "\n" +
                 "Price: " + fees + "\n"+
                 "Reserved: " + isSpotReserved + "\n";
+    }
+    @Override
+    public String toString() { //Owner
+        return getId()+","+getType()+","+fees+","+isSpotReserved;
     }
 }

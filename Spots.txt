@@ -1,26 +1,25 @@
-1, Normal, 20.0
-2, Normal, 20.0
-3, Normal, 20.0
-4, Normal, 20.0
-5, Normal, 20.0
-6, Normal, 20.0
-7, Normal, 20.0
-8, Normal, 20.0
-9, Normal, 20.0
-10, Normal, 20.0
-11, Bike, 10.0
-12, Bike, 10.0
-13, Bike, 10.0
-14, Bike, 10.0
-15, Bike, 10.0
-16, Bike, 10.0
-17, Bike, 10.0
-18, Bike, 10.0
-19, Bike, 10.0
-20, Bike, 10.0
-21, Large, 30.0
-22, Large, 30.0
-23, Large, 30.0
-24, Large, 30.0
-25, Large, 30.0
-
+1,Normal,20.0,false
+2,Normal,20.0,false
+3,Normal,20.0,false
+4,Normal,20.0,false
+5,Normal,20.0,false
+6,Normal,20.0,false
+7,Normal,20.0,false
+8,Normal,20.0,false
+9,Normal,20.0,false
+10,Normal,20.0,false
+11,Bike,10.0,false
+12,Bike,10.0,false
+13,Bike,10.0,false
+14,Bike,10.0,false
+15,Bike,10.0,false
+16,Bike,10.0,false
+17,Bike,10.0,false
+18,Bike,10.0,false
+19,Bike,10.0,false
+20,Bike,10.0,false
+21,Large,30.0,false
+22,Large,30.0,false
+23,Large,30.0,false
+24,Large,30.0,false
+25,Large,30.0,false
