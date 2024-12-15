@@ -9,17 +9,23 @@ public class SlotManager {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.trim().startsWith("/") || line.trim().isEmpty()) continue;
+                try {
+                    String[] parts = line.split(",");
+                    int slotId = Integer.parseInt(parts[0].trim());
+                    int spotId = Integer.parseInt(parts[1].trim());
+                    LocalDate date = LocalDate.parse(parts[2].trim());
+                    LocalTime startTime = LocalTime.parse(parts[3].trim());
+                    LocalTime endTime = LocalTime.parse(parts[4].trim());
+                    boolean isReserved = Boolean.parseBoolean(parts[5].trim());
 
-                String[] parts = line.split(",");
-                int slotId = Integer.parseInt(parts[0].trim());
-                int spotId = Integer.parseInt(parts[1].trim());
-                LocalDate date = LocalDate.parse(parts[2].trim());
-                LocalTime startTime = LocalTime.parse(parts[3].trim());
-                LocalTime endTime = LocalTime.parse(parts[4].trim());
-                boolean isReserved = Boolean.parseBoolean(parts[5].trim());
-
-                slots.add(new Slot(slotId, spotId, date, startTime, endTime, isReserved));
+                    slots.add(new Slot(slotId, spotId, date, startTime, endTime, isReserved));
+                } catch (NumberFormatException e) {
+                    System.out.println("In " + filePath + " => Error parsing line: " + line);
+                }
             }
+        }catch (IOException e) {
+            System.out.println("Error reading the file: " + filePath);
+            throw e;
         }
         return slots;
     }

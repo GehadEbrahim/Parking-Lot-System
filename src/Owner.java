@@ -10,6 +10,7 @@ public class Owner extends User{
 
     Scanner in = new Scanner(System.in);
     //Constructor
+
     public Owner(int id, String email, String name, String password , int phone) {
         super(name, password);
         this.ID = id;

@@ -18,9 +18,12 @@ public class SpotManager {
                     double fees = Double.parseDouble(parts[2].trim());
                     spots.add(new Spot(type, spotId, fees));
                 } catch (NumberFormatException e) {
-                    System.out.println("Error parsing line: " + line);
+                    System.out.println("In " + filePath + " => Error parsing line: " + line);
                 }
             }
+        }catch (IOException e){
+            System.out.println("Error reading the file: " + filePath);
+            throw e;
         }
         return spots;
     }
@@ -28,19 +31,19 @@ public class SpotManager {
     public void displayAvailableSpots(List<Spot> spots , String type) {
         boolean availableFound = false;
         for (Spot spot : spots) {
-            if (!spot.isFull() && spot.getType().toUpperCase().equals(type)){
+            if (!spot.isFull() && spot.getType().toUpperCase().equals(type.toUpperCase())){
                 System.out.println(spot.SpotDetails());
                 availableFound = true;
             }
         }
         if (!availableFound) {
-            System.out.println("No available spots.");
+            System.out.println("\nNo available spots.");
         }
     }
 
     public static void displaySpots(List<Spot> spots) {
-        for (int i = 0; i < spots.size(); i++) {
-            System.out.println((i + 1) + ") " + spots.get(i).AllSpotDetails());
+        for (Spot spot : spots) {
+            System.out.println(spot.AllSpotDetails());
         }
     }
 

@@ -21,7 +21,7 @@ public class OwnerManager {
                     String email = parts[4].trim();
                     owners.add(new Owner(index ,email, name, password , phoneNumber));
                 } catch (NumberFormatException e) {
-                    System.out.println("Error parsing line: " + line);
+                    System.out.println("In "+ filePath+ " => Error parsing line: " + line);
                 }
             }
         } catch (IOException e) {

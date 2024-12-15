@@ -15,7 +15,7 @@ public class Vehicle {
 
     }
 
-    public Vehicle(int vehicleId ,String ownerName, String licence_number, String type) {
+    public Vehicle(int vehicleId ,String ownerName, String type, String licence_number) {
         this.vehicleId = vehicleId;
         this.licence_number = licence_number;
         this.ownerName = ownerName;
@@ -29,9 +29,13 @@ public class Vehicle {
             while ((line = read.readLine()) != null) {
                 if (line.trim().isEmpty() || line.trim().startsWith("/")) {
                     continue;
+                }try {
+                    String[] parts = line.split(",");
+                    vehicles.add(new Vehicle(Integer.parseInt(parts[0].trim()), parts[1].trim(), parts[2].trim(), parts[3].trim()));
+                }catch (NumberFormatException e){
+                    System.out.println("In " + filepath + " => Error reading line " + line);
+                    throw e;
                 }
-                String[] parts = line.split(",");
-                vehicles.add(new Vehicle( Integer.parseInt(parts[0].trim()) ,parts[1].trim() , parts[2].trim(), parts[3].trim()));
             }
         }catch (IOException e){
             System.out.println("Error reading the file: " + filepath + e.getMessage());  // Changed to use the provided filePath
@@ -80,7 +84,7 @@ public class Vehicle {
             String type = in.next().toLowerCase();
             System.out.print("License Number: ");
             String licenseNumber = in.next();
-            Vehicle vehicle = new Vehicle(Main.vehicles.size() + 1 , Main.owners.get(Main.index).name , licenseNumber, type);
+            Vehicle vehicle = new Vehicle(Main.vehicles.size() + 1 , Main.owners.get(Main.index).name , type, licenseNumber);
             Main.vehicles.add(vehicle);
             System.out.println("Vehicle added successfully!\n-----------------------------");
         }

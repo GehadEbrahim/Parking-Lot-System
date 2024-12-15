@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Spot {
     private String Type;   // Type of spot (Normal, Bike, Large)
     private int Spot_ID;
-    private ArrayList<Slot> slots; // Array to hold 3 Slots objects
+    private ArrayList<Slot> slots;
+    // Array to hold 3 Slots objects
     private static int slotCount; // how many slots are assigned
     private double fees;
     private boolean isSpotReserved;

@@ -1,33 +1,24 @@
 import java.util.*;
 
 public class Reservation {
-    // Attributes of The Reservation Class
-    Spot spot  = new Spot();
-    private Owner owner =new Owner(Main.owners.get(Main.index).getID() ,
-            Main.owners.get(Main.index).getEmail() ,
-            Main.owners.get(Main.index).name ,
-            Main.owners.get(Main.index).password ,
-            Main.owners.get(Main.index).getPhone());
-    private String ownerName ;
-    private List<Integer> slotIDs;
-    private static int numOfReservation = 0;
-    private String vehicleType;
-    private String licenseNumber;
+//            Attributes
+        Spot spot  = new Spot();
+        private String ownerName;
+        private List<Integer> slotIDs;
+        private static int numOfReservation = 0;
+        private String vehicleType;
+        private String licenseNumber;
 
-
-    public static int getNumOfReservation() {
-        return numOfReservation;
-    }
-
-    // Constructor
-    public Reservation(String ownerName , int spotID, List<Integer> slotIDs, String vehicleType, String licenseNumber) {
-        this.ownerName = ownerName;
-        this.spot.setId(spotID);
-        this.vehicleType = vehicleType;
-        this.licenseNumber = licenseNumber;
-        this.slotIDs = slotIDs;
-        numOfReservation++;
-    }
+        // Constructor now accepts owner as a parameter
+        public Reservation(String ownerName, int spotID, List<Integer> slotIDs, String vehicleType, String licenseNumber) {
+//            this.owner = owner;
+            this.ownerName = ownerName;
+            this.spot.setId(spotID);
+            this.vehicleType = vehicleType;
+            this.licenseNumber = licenseNumber;
+            this.slotIDs = slotIDs;
+            numOfReservation++;
+        }
 
                  // Getters
     public String getOwnerName() {
@@ -56,9 +47,6 @@ public class Reservation {
         this.spot.setId(spotID);
     }
 
-    public void setOwnerName(String ownerName) {
-        owner.name = ownerName;
-    }
 
     public void setLicenseNumber(String licenseNumber) {
         this.licenseNumber = licenseNumber;
@@ -75,19 +63,36 @@ public class Reservation {
 
     public void setSlotIDs(ArrayList<Integer> slotIDs) {
         this.slotIDs = slotIDs;
+        for(int slotId : slotIDs){
+            spot.getSlots().get(slotId).setReserved(true);
+        }
     }
 
     public String reservationDetails(){
         return "Owner name: " + ownerName +
                 "\nSpot ID: " + spot.getId()+
-                "\nSlot IDs: " + slotIDs.toString() +
+                "\nSlot IDs: " + slotsToString() +
                 "\nVehicle type: "+ vehicleType+
                 "\nLicense number: "+ licenseNumber;
     }
 
     // toString method to convert all date to String
+
+    public String slotsToString(){
+        StringBuilder slotIDsStringBuilder = new StringBuilder(); // StringBuilder => to collect texts
+
+        for (int i = 0; i < slotIDs.size(); i++) {
+            slotIDsStringBuilder.append(slotIDs.get(i)); //  String =>to add item as a String
+            if (i < slotIDs.size() - 1) {
+                // append(",") => add "," between each 2 elements --> that's mean add comma after each element except the last element
+                slotIDsStringBuilder.append(",");
+            }
+        }
+
+        return slotIDsStringBuilder.toString(); // Conver "slotIDsStringBuilder" to a String
+    }
     @Override
     public String toString() {
-        return owner.name +","+spot.getId()+","+slotIDs.toString()+","+vehicleType+"," + licenseNumber;
+        return ownerName +","+spot.getId()+","+this.slotsToString()+","+vehicleType+"," + licenseNumber;
     }
 }

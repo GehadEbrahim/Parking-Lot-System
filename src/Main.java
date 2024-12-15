@@ -25,13 +25,14 @@ public class Main {
             vehicles = vehicle.loadVehicles(FilePaths.VEHICLES_FILE_PATH);
             spots = spotManager.loadSpots(FilePaths.SPOTS_FILE_PATH); // it returns an ArrayList its type is Spot
             slots = slotManager.loadSlots(FilePaths.SLOTS_FILE_PATH);
-            reservations = reservationManager.loadReservations(FilePaths.RESERVATIONS_FILE_PATH);
             owners = ownerManager.loadOwners(FilePaths.OWNERS_FILE_PATH);
         } catch (Exception e) {
-            System.out.println("Error loading data: " + e.getMessage());
+            System.out.println("Error loading data ");
+            throw e;
         }
         try {
             startLog();
+            reservations = reservationManager.loadReservations(FilePaths.RESERVATIONS_FILE_PATH);
         } catch (Exception e) {
             System.out.print("An error occurred: " + e.getMessage());
         }
