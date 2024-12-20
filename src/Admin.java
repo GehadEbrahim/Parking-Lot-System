@@ -1,11 +1,8 @@
-import java.util.ArrayList;
-
+import java.io.IOException;
 public class Admin extends User
 {
     private String Email;
     private double total_earning;
-    private ArrayList<Owner> ownerList; // ArrayList for Owners
-    private ArrayList <Spot> spotList;   // ArrayList for Spots
 
     public Admin() {
         super("admin", "admin");
@@ -22,22 +19,10 @@ public class Admin extends User
     }
 
     @Override
-    public int logIn(String name, String password) {
-        return -1;
-    }
-    public void display_data() {
-        System.out.println("---->> Owner Data");
-        for (Owner owner : ownerList) {
-            System.out.print(owner.toString()); // Use the owner instance to call getDetails()
-            System.out.println("---->> Spot Data");
-            for (Spot spot : spotList) {
-                System.out.println(spot.toString());
-                System.out.println("---->> Slot Data");
-                ArrayList<Slot> slots = spot.getSlots();
-                for (int i = 0; i < spot.getSlotCount(); i++) {
-                    System.out.println(slots.get(i).toString());
-                }
-            }
-        }
+    public int logIn(String name, String password) throws IOException {
+        if (name.toLowerCase().equals("admin") && password.toLowerCase().equals("admin")) {
+            return 0;}
+        else
+            return -1;
     }
 }

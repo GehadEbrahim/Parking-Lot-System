@@ -1,7 +1,13 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Main  extends Application {
 
     public static List<Spot> spots = new ArrayList<>();
     public static List<Slot> slots = new ArrayList<>(3);
@@ -18,30 +24,47 @@ public class Main {
     public static Vehicle vehicle = new Vehicle();
     static Admin admin = new Admin();
 
+
+    @Override
+    public void start(Stage stage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("ParkingLot.fxml"));
+        Scene scene = new Scene(root);
+        stage.setWidth(520);
+        stage.setHeight(680);
+        stage.setScene(scene);
+        stage.setTitle("Parking Page");
+        stage.show();
+    }
+
+
     //****************************Start Main****************************//
     public static void main(String[] args) throws IOException {
-            GeneralFunctions generalFunctions = new GeneralFunctions();
+        GeneralFunctions generalFunctions = new GeneralFunctions();
         try {
             vehicles = vehicle.loadVehicles(FilePaths.VEHICLES_FILE_PATH);
             spots = spotManager.loadSpots(FilePaths.SPOTS_FILE_PATH); // it returns an ArrayList its type is Spot
             slots = slotManager.loadSlots(FilePaths.SLOTS_FILE_PATH);
+            if (slots.isEmpty()) {
+                System.out.println("Error: No slots loaded. Please check the file: " + FilePaths.SLOTS_FILE_PATH);
+            }
             owners = ownerManager.loadOwners(FilePaths.OWNERS_FILE_PATH);
+            reservations = reservationManager.loadReservations(FilePaths.RESERVATIONS_FILE_PATH);
         } catch (Exception e) {
             System.out.println("Error loading data ");
             throw e;
         }
         try {
             startLog();
-            reservations = reservationManager.loadReservations(FilePaths.RESERVATIONS_FILE_PATH);
+            //launch(args);
         } catch (Exception e) {
             System.out.print("An error occurred: " + e.getMessage());
         }
         // Save any changes to the file only at the end
         generalFunctions.WriteInFile(FilePaths.OWNERS_FILE_PATH , owners);
-        generalFunctions.WriteInFile(FilePaths.RESERVATIONS_FILE_PATH , reservations);
         generalFunctions.WriteInFile(FilePaths.SPOTS_FILE_PATH , spots);
         generalFunctions.WriteInFile(FilePaths.SLOTS_FILE_PATH , slots);
         generalFunctions.WriteInFile(FilePaths.VEHICLES_FILE_PATH , vehicles);
+        generalFunctions.WriteInFile(FilePaths.RESERVATIONS_FILE_PATH , reservations);
 
     }
 
@@ -94,7 +117,7 @@ public class Main {
                     }
                 }
             }
-        else if (anserLogReges == 2) {
+            else if (anserLogReges == 2) {
                 ownerManager.Register();
                 System.out.println("\t\t\t\tWelcome " + name + "\n\t\t\t  ----------------------");
                 ownerManager.menu();
@@ -102,7 +125,10 @@ public class Main {
                 System.out.println("Invalid choice!");
             }
         } catch (Exception e) {
-            System.out.print("An error occurred: " + e.getMessage());
-        }
+        System.out.print("An error occurred at the end Main: " + e.getMessage());
+        e.printStackTrace(); // عشان اعرف تفاصيل المشكلة
     }
+
 }
+}
+

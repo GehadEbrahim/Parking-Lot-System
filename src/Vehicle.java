@@ -77,16 +77,38 @@ public class Vehicle {
     public void addVehicle(){
         System.out.println("How many vehicles do you want to add? (Max 3)");
         int vehicleCount = in.nextInt();
-
-        for (int i = 0; i < vehicleCount; i++) {
-            System.out.println("Enter details for vehicle " + (i + 1) + ":");
-            System.out.print("Vehicle Type (large, bike, normal): ");
-            String type = in.next().toLowerCase();
-            System.out.print("License Number: ");
-            String licenseNumber = in.next();
-            Vehicle vehicle = new Vehicle(Main.vehicles.size() + 1 , Main.owners.get(Main.index).name , type, licenseNumber);
-            Main.vehicles.add(vehicle);
-            System.out.println("Vehicle added successfully!\n-----------------------------");
+        if(vehicleCount <= 3){
+            for (int i = 0; i < vehicleCount; i++) {
+                System.out.println("Enter details for vehicle " + (i + 1) + ":");
+                String type = null;
+                System.out.print("Your vehicle type is: \n" +
+                        "1) 4*4 Car\n" +
+                        "2) Car\n" +
+                        "3) Bike");
+                System.out.print(" ==> ");
+                int vehicleChoice = in.nextInt();
+                switch (vehicleChoice){
+                    case 1:
+                        type = "large";
+                        break;
+                    case 2:
+                        type = "normal";
+                        break;
+                    case 3:
+                        type = "bike";
+                        break;
+                    default:
+                        System.out.println("Invalid vehicle type choice!");
+                }
+                System.out.print("License Number: ");
+                String licenseNumber = in.next();
+                Vehicle vehicle = new Vehicle(Main.vehicles.size() + 1 , Main.owners.get(Main.index).name , type, licenseNumber);
+                Main.vehicles.add(vehicle);
+                System.out.println("Vehicle added successfully!\n-----------------------------");
+            }
+        }
+        else{
+            System.out.println("You can add 3 vehicles maximum.");
         }
     }
     public String vehicleDetails(){

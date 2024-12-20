@@ -4,14 +4,13 @@ public class Reservation {
 //            Attributes
         Spot spot  = new Spot();
         private String ownerName;
-        private List<Integer> slotIDs;
+        private List<Integer> slotIDs = new ArrayList<>();
         private static int numOfReservation = 0;
         private String vehicleType;
         private String licenseNumber;
 
         // Constructor now accepts owner as a parameter
         public Reservation(String ownerName, int spotID, List<Integer> slotIDs, String vehicleType, String licenseNumber) {
-//            this.owner = owner;
             this.ownerName = ownerName;
             this.spot.setId(spotID);
             this.vehicleType = vehicleType;
@@ -20,7 +19,11 @@ public class Reservation {
             numOfReservation++;
         }
 
-                 // Getters
+    public Reservation() {
+
+    }
+
+    // Getters
     public String getOwnerName() {
         return ownerName;
     }
@@ -57,17 +60,32 @@ public class Reservation {
     }
 
     // Add a Slot ID
-    public void addSlotID(int slotID) {
-        slotIDs.add(slotID);
-    }
+    public void addSlotID(int slotID) throws Exception{
+            try {
 
-    public void setSlotIDs(ArrayList<Integer> slotIDs) {
-        this.slotIDs = slotIDs;
-        for(int slotId : slotIDs){
-            spot.getSlots().get(slotId).setReserved(true);
+        if (slotID >= 0 && slotID < spot.getSlots().size()) {
+            slotIDs.add(slotID);
+            spot.reserveSlot(spot.getSpotID(), slotID-1);
+        }}catch (Exception e){
+            System.out.println("Invalid slotId 'Reservation class' : " + slotID + ". Available slots: " + spot.getSlots().size());
+            e.printStackTrace();
         }
     }
 
+
+//    public void setSlotIDs(ArrayList<Integer> slotIDs) {
+//        this.slotIDs = slotIDs;
+//        for(int slotId : slotIDs) {
+//            if (slotId >= 0 && slotId < spot.getSlots().size()) {
+//                spot.getSlots().get(slotId).setReserved(true);
+//            } else {
+//                System.out.println("Invalid slotId: " + slotId);
+//            }
+//        }
+//    }
+
+
+    //I want to edit it to display the slot id with its data & time
     public String reservationDetails(){
         return "Owner name: " + ownerName +
                 "\nSpot ID: " + spot.getId()+
@@ -96,3 +114,11 @@ public class Reservation {
         return ownerName +","+spot.getId()+","+this.slotsToString()+","+vehicleType+"," + licenseNumber;
     }
 }
+
+
+
+
+
+
+
+

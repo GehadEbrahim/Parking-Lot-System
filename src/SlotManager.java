@@ -11,13 +11,12 @@ public class SlotManager {
                 if (line.trim().startsWith("/") || line.trim().isEmpty()) continue;
                 try {
                     String[] parts = line.split(",");
-                    int slotId = Integer.parseInt(parts[0].trim());
-                    int spotId = Integer.parseInt(parts[1].trim());
+                    int spotId = Integer.parseInt(parts[0].trim());
+                    int slotId = Integer.parseInt(parts[1].trim());
                     LocalDate date = LocalDate.parse(parts[2].trim());
                     LocalTime startTime = LocalTime.parse(parts[3].trim());
                     LocalTime endTime = LocalTime.parse(parts[4].trim());
                     boolean isReserved = Boolean.parseBoolean(parts[5].trim());
-
                     slots.add(new Slot(slotId, spotId, date, startTime, endTime, isReserved));
                 } catch (NumberFormatException e) {
                     System.out.println("In " + filePath + " => Error parsing line: " + line);
@@ -30,7 +29,7 @@ public class SlotManager {
         return slots;
     }
 
-    public void displaySlots(List<Slot> slots) {
+    public void displaySlots(List<Slot> slots) { //display all slots in the file
         for (int i = 0 , num = 1; i < slots.size(); i++ , num++) {
             if(num == 4){
                 num = 1; // to just display 1 ,2 ,3
@@ -39,8 +38,9 @@ public class SlotManager {
         }
     }
 
+    //بتظهر الslots المتاحة بناءًا على رقم الspot
     public void displayAvailableSlots(List<Slot> slots, int spotId) {
-        System.out.println("Available Slots for Spot ID " + spotId + ":");
+        System.out.println("Available Slots for Spot " + spotId + ":");
         for (Slot slot : slots) {
             if (slot.getSpotId() == spotId && !slot.isReserved()) {
                 System.out.println(slot.slotDetails());

@@ -34,6 +34,7 @@ public class OwnerManager {
             System.out.println((i + 1) + ") " + owners.get(i).getOwnerDetails());
         }
     }
+    //it didn't work
 //    public void displayOwnerVehicle() {
 //        if (Main.owners.get(Main.index).getVehicles().isEmpty()) {
 //            System.out.println("No vehicles associated with this owner.");
@@ -74,7 +75,7 @@ public class OwnerManager {
                     //rewards
                     break;
                 case 6:
-                    System.out.println("\t\t\t\t\t\tLogging out.....\n\t\t\t\t\t\t\t\tGoodbye!");
+                    System.out.println("\t\t\t\t\t\tLogging out.....\n");
                     Main.name = null;
                     return;
                 case 7:
@@ -82,11 +83,22 @@ public class OwnerManager {
                     System.out.println("Are you sure you want to delete your account?(y/n)");
                     System.out.print(" ==> ");
                     deleteChoice = in.next();
-                    Main.owners.remove(Main.index); //delete the owner who has logged in
-                    System.out.println("Your account has been deleted.");
-                    System.out.println("\t\t\t\t\t\tLogging out.....\n\t\t\t\t\t\t\t\tGoodbye!");
-                    Main.name = null;
-                    return;
+                    if(deleteChoice.toLowerCase().equals("y")) {
+                        Main.owners.remove(Main.index); //delete the owner who has logged in
+                        //it didn't work
+//                        for (int i = 0 ; i < Main.owners.size() ; i++){
+//                            for(int j = 0 ; j < Main.vehicles.size() ; j++){
+//                                if (Main.owners.get(i).name.equals(Main.vehicles.get(i).getOwnerName()))
+//                                    Main.vehicles.remove(j);
+//                            }
+//                        }
+                        System.out.println("Your account has been deleted.");
+                        System.out.println("\t\t\t\t\t\tLogging out.....\n\t\t\t\t\t\t\t\t");
+                        Main.name = null;
+                        return;
+                    }else{
+                        break;
+                    }
                 default:
                     System.out.print("Invalid choice. Please enter a valid number");
             }
@@ -106,6 +118,11 @@ public class OwnerManager {
                 System.out.print("Enter the new name: ");
                 String name = in.next();
                 Main.owners.get(Main.index).setName(name);
+                //it didn't work
+//                for(int i = 0 ; i < Main.vehicles.size() ; i++){
+//                    if(Main.owners.get(Main.index).name.equals(Main.vehicles.get(i).getOwnerName()))
+//                        Main.vehicles.get(i).setOwnerName(name);
+//                }
                 System.out.println("Name changed successfuly!\n");
                 break;
             case 2:
@@ -137,12 +154,12 @@ public class OwnerManager {
         Main.name = name;
         System.out.print("Create your password: ");
         String pass = in.next();
-        System.out.print("Enter your emial: ");
+        System.out.print("Enter your email: ");
         String email = in.next();
         System.out.print("Enter your phone number: ");
         int number = in.nextInt();
         Main.index = Main.owners.size();
-        Main.owners.add(new Owner(Main.index , email , name , pass , number));
+        Main.owners.add(new Owner(Main.index + 1 , email , name , pass , number));
         Main.vehicle.addVehicle();
     }
 }

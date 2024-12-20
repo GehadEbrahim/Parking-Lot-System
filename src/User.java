@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public abstract class User {
     protected String name;
     protected String password;
@@ -21,7 +23,6 @@ public abstract class User {
     public void setName(String name) {
         this.name = name;
     }
-
-    abstract public int logIn(String name, String password);
-    // public abstract void logOut(String name , String password);
+    // 0 => admin , 1 => owner , -1 => Invalid
+    abstract public int logIn(String name, String password) throws IOException;
 }

@@ -18,7 +18,7 @@ public class Slot {
         this.isReserved = isReserved;
     }
 
-    // Default constructor (optional, if needed)
+    // Default constructor => optional, if needed
     public Slot() {
         this.slotId = 0;
         this.spotId = 0;
@@ -90,7 +90,7 @@ public class Slot {
                 "Start Time: " + startTime + "\n" +
                 "End Time: " + endTime + "\n";
     }
-    public String allSlotDetails(){
+    public String allSlotDetails(){ //admin => we will display all slots either it reserved or not
         return "Slot Details:\n" +
                 "Slot ID: " + slotId + "\n" +
                 "Spot ID: " + spotId + "\n" +

@@ -28,6 +28,7 @@ public class SpotManager {
         return spots;
     }
 
+    //لو لقى على الاقل  هيعرضه و يبقى صح و يعرض
     public void displayAvailableSpots(List<Spot> spots , String type) {
         boolean availableFound = false;
         for (Spot spot : spots) {

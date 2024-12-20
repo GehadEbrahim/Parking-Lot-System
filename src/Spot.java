@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Spot {
     private String Type;   // Type of spot (Normal, Bike, Large)
     private int Spot_ID;
-    private ArrayList<Slot> slots;
+    private ArrayList<Slot> slots = new ArrayList<>();
     // Array to hold 3 Slots objects
     private static int slotCount; // how many slots are assigned
     private double fees;
@@ -42,6 +42,17 @@ public class Spot {
         }
         return false; // there is no available space to add another slot
     }
+
+    //Assign slot in a spot
+    public void reserveSlot(int spotID, int slotIndex) {
+        if (slotIndex >= 0 && slotIndex < slots.size()) {
+            slots.get(slotIndex).setReserved(true);
+        } else {
+            System.out.println("Invalid slot index 'spot class': " + slotIndex + ". List size: " + slots.size());
+        }
+    }
+
+
 
     // Getters and setters
     public String getType() {
@@ -83,6 +94,10 @@ public class Spot {
         return slots;
     }
 
+    public Slot getOneSlot(int index) {
+        return slots.get(index);
+    }
+
     public boolean isSpotReserved() {
         return isSpotReserved;
     }
@@ -93,6 +108,7 @@ public class Spot {
 
     // Check if the spot is full
     public boolean isFull() {
+
         return slotCount == 3; //if slotCount == 3 => return true
     }
 
