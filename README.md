@@ -7,9 +7,9 @@ This is a Java-based system to manage parking spot reservations in a garage. Veh
 
 ### Overview:
 This project manages a system for garage parking spot reservation. Vehicle owners can reserve parking spots for one hour or more based on their vehicle type. The system supports the following spot types:
-- *Normal Spot**: For cars.
-- *Bike Spot**: For bikes.
-- *Large Spot**: For 4x4 vehicles.
+- *Normal Spot*: For cars.
+- *Bike Spot*: For bikes.
+- *Large Spot*: For 4x4 vehicles.
 
 ### Functionalities:
 1. **Admin Functionalities:**
@@ -44,6 +44,6 @@ This project manages a system for garage parking spot reservation. Vehicle owner
 ## How to Use:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/GehadEbrahim/project-repo.git
+   git clone https://github.com/GehadEbrahim/Parking-Lot-System.git
 
 
